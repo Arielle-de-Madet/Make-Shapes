@@ -97,11 +97,11 @@ function processJsonRequests(filePath){
           var fileName = "";
 
           if (multipleFiles == true) {
-            fileName = "./Data/"  + nombre + "." + shape + "."  + "orders[" + i + "].txt"
+            fileName = "./Data/Orders/"  + nombre + "." + shape + "."  + "orders[" + i + "].txt"
             fileContent = "";
 
           } else if (multipleFiles == false) {
-            fileName = "./Data/" + nombre + ".txt"
+            fileName = "./Data/Orders/" + nombre + ".txt"
           }
 
           var tempFileContent = "";
