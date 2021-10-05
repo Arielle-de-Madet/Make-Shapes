@@ -1,7 +1,7 @@
 'use strict';
 
-import * as Shaper from './DrawShape.js';
-import { writeToFile, deleteFile, readFromFile, jsonReader, EnviarShapeToClient} from  './fileOperations.js'
+import * as Shaper from './src/DrawShape.js';
+import { writeToFile, deleteFile, readFromFile, jsonReader, EnviarShapeToClient} from  './utils/fileOperations.js'
 import fs from 'fs';
 
 var lado = "";
