@@ -1,0 +1,21 @@
+{
+ "Solicitudes" : [
+        {
+            "nombre": "Arielle",
+            "tipoDeEntrega": "correo",
+            "correo": "arielle@gmail.com",
+            "multipleFiles": false,
+            "orders" : 
+            [
+                {
+                    "lado": "+",
+                    "centro": "+",
+                    "cantidad": 1,
+                    "ratio": 2,
+                    "shape": "rhombus"
+                }
+            ]
+        } 
+    ]  
+
+}        

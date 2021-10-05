@@ -1,0 +1,72 @@
+{
+    "shapes" : [
+            {
+                "nombre": "Arielle",
+
+                "tipoDeEntrega": "correo",
+                "correo": "arielle@gmail.com",
+                "Solicitudes" : 
+                [
+                    {
+                        "lado": "#",
+                        "centro": "0",
+                        "cantidad": 5
+
+                    },
+                    {
+                        "lado": ".",
+                        "centro": ".",
+                        "cantidad": 5
+
+                    }
+                ]            },
+            {
+                "nombre": "Luiz",
+                "tipoDeEntrega": "correo",
+                "correo": "luiz@gmail.com",
+                "Solicitudes" : 
+                [
+                    {
+                        "lado": "#",
+                        "centro": "0",
+                        "cantidad": 1
+
+                    }
+                ]
+            },
+            {
+                "nombre": "Melissa",
+                "tipoDeEntrega": "correo",
+                "correo": "melissa@gmail.com",
+                "Solicitudes" : 
+                [
+                    {
+                        "lado": "#",
+                        "centro": "0",
+                        "cantidad": 1
+
+                    },
+                    {
+                        "lado": ".",
+                        "centro": "-",
+                        "cantidad": 2
+
+                    }
+                ]            
+            },
+            {
+                "nombre": "Franklin",
+                "tipoDeEntrega": "correo",
+                "correo": "franklin@gmail.com",
+                "Solicitudes" : 
+                [
+                    {
+                        "lado": "#",
+                        "centro": "0",
+                        "cantidad": 5
+
+                    }
+                ]            
+            }
+        ]
+}

@@ -1,0 +1,12 @@
+{
+    "userID": "DE007-fromUser",
+    "ultimaRecarga": "DE015 - Last Transaction Date where Transaction Type must be equal to Recharge",
+    "transactions": [
+      {
+        "transactionDate": "DE015",
+        "details":  "If transaction type equal to recharge show DE016-Transaction Type else DE012-Location Name",
+        "Amount": "DE009"
+     }
+    ]
+
+}    

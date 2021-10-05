@@ -1,0 +1,81 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+  <head>
+
+      <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+
+      <!-- Link to External JavaScript -->
+      <!-- <script language="javascript" type="module" src="Draw.Shape.js"></script> -->
+      <!-- <script language="javascript" type="module" src="Calculadora.js"></script> -->
+      <script type="module">
+
+        import * as calc from "./Calculadora.js"
+        import * as shapeMaker from "./DrawShape.js"
+
+      </script>
+
+  </head>
+
+    <body>  
+
+        <h2> Calculadora Target </h2>
+
+        <label for="operation">Select an operation:</label>
+
+        <select name="operation" id="operation">
+            <option value="+">Add</option>
+            <option value="-">Subtract </option>
+            <option value="*">Multiple </option>
+            <option value="/">Divide</option>
+
+        </select>
+
+        <br><br>
+
+        <label for="Num1">Numero 1:</label><br>
+        <input type="text" id="Num1" name="Num1"><br><br>
+        <label for="Num2">Numero 2:</label><br>
+        <input type="text" id="Num2" name="Num2"><br><br>
+
+        <button onclick="MyController()">Execute</button><br><br><br>
+
+        <label for="c1">Caracter de los lados:</label>
+        <input type="text" id="c1" name="c1" size="1"><br><br>
+        <label for="c2">Caracter del centro:</label>
+        <input type="text" id="c2" name="c2" size="1"><br><br>
+
+        <button onclick="CallShapeController()">Draw Shape</button>
+
+        <p id="resultado"></p>
+        <p id="Shape"></p>
+
+        <script>
+          function CallCalculator() {
+
+            var desiredOperation = document.getElementById("operation").value;
+            var n1 = document.getElementById("Num1").value;
+            var n2 = document.getElementById("Num2").value;
+
+            var contenido = MyController (desiredOperation, n1, n2);
+              document.getElementById("resultado").innerHTML = contenido;
+          }
+
+          function CallShapeController(){
+
+            var c1 = document.getElementById("c1").value;
+            var c2 = document.getElementById("c2").value;  
+
+            document.getElementById("Shape").innerHTML = ShapeController(c1, c2);
+          }
+
+
+        </script>
+        
+    </body>
+
+</html>
