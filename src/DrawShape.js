@@ -597,9 +597,9 @@ function Centro(Tamano, CaracterDeseado){
 function Derecha(Tamano, CaracterDeseado){
     return PonerLetras(Tamano, CaracterDeseado);
 }
-function Border(Tamano, CaracterDeseado){
-   return PonerLetras(Tamano, CaracterDeseado);
-}
+// function Border(Tamano, CaracterDeseado){
+//    return PonerLetras(Tamano, CaracterDeseado);
+// }
 export { ShapeController};
 /*
    columnas[24] 
@@ -615,6 +615,7 @@ export { ShapeController};
 |.../...................
 |../....................
 |./.....................
+
 
 rows = 12
 */
