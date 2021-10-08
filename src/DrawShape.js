@@ -16,7 +16,7 @@ function ShapeController(c1, c2, outputType, shapeType, ratio){
         return MakeCross(c1, c2, outputType, ratio);
         break;  
     case "envelope":
-      return MakeEnvelope(c1, c2, outputType, ratio);
+      return MakeEnvelope(c1, c2, "O", outputType, ratio);
       break;      
     default:
       return "Shape not implemented"
@@ -259,9 +259,9 @@ limiteAbajo = row- limiteArriba
 */
 
   var columnas =Math.round (24 * ratio) ;                         // # de columnas del area del trabajo
-  var rows = Math.round(columnas * 0.25);                // # de vueltas de una mitad  
-  var tamanoDelCentro = Math.round(columnas * 0.70);    // # de columnas dentro del shape
-  var lateral = Math.round(columnas * 0.20);            // # de columnas afuera del shape
+  var rows = Math.round(columnas * 0.25);                         // # de vueltas de una mitad  
+  var tamanoDelCentro = Math.round(columnas * 0.70);              // # de columnas dentro del shape
+  var lateral = Math.round(columnas * 0.20);                      // # de columnas afuera del shape
 
   var Shape = "";                                                 // contenido del shape
   var lineFeed = "\n";
@@ -594,8 +594,83 @@ function MakeCrossV1 (c1, c2, outputType, ratio){
    return Shape;
  
 }
-function MakeEnvelope (c1, c2, outputType, ratio){
-  return "Este es mi envelope"
+function MakeEnvelope (c1, c2, c3, outputType, ratio){
+  /*
+   columnas[26] 
+                           c1=".", c2= "+", c3= "o"/  outputType = terminal
+ 
+01 ..........................    [26.]
+02 .......................... limiteArriba = rows * 0.12
+03 ..|+\+++++++++++++++++++..  [2.] [1|] [1+] [\] [19+] [2.] 
+04 ..|++\OOOOOOOOOOOOOOOOO+..  [2.] [1|] [+ -> 1] [\] [O -> -1] [2.]
+05 ..|+++\OOOOOOOOOOOOOOOO+..
+06 ..|++++\OOOOOOOOOOOOOOO+..
+07 ..|+++++\OOOOOOOOOOOOOO+..
+08 ..|++++++\OOOOOOOOOOOOO+.. limiteMedio = rows * 0.5
+09 ..|++++++/OOOOOOOOOOOOO+..
+10 ..|+++++/OOOOOOOOOOOOOO+..
+11 ..|++++/OOOOOOOOOOOOOOO+..
+12 ..|+++/OOOOOOOOOOOOOOOO+..
+13 ..|++/OOOOOOOOOOOOOOOOO+..
+14 ..|+/+++++++++++++++++++.. limiteAbajo = rows - limiteArriba
+15 ..........................
+16 ..........................
+
+tamanoDelCuerpo = columnas * 0.84
+headerFooter = Centro(columnas, c1) ->
+aperturaCierre = "..|" + Izquierda (i-1, c2) + "\\" + Derecha(tamanoDelCuerpo - (i+1), c2) + "+.." 
+cuerpo = "..|" + Izquierda (i-1, c2) + "\\" + Derecha(tamanoDelCuerpo - (i+1), c3) + "+.." 
+
+rows = 16
+*/
+
+var columnas =Math.round (26 * ratio) ;                   // # de columnas del area del trabajo
+var rows = Math.round(columnas * 0.61);                   // # de vueltas de una mitad  
+var tamanoDelCuerpo = Math.round(columnas * 0.84);        // # de columnas dentro del shap
+
+var Shape = "";                                           // contenido del shape
+var lineFeed = "\n";
+
+if (outputType == "web") {
+  lineFeed = "<br>";
+} else {
+  lineFeed = "\n";
+}
+
+var limiteArriba = Math.round (rows * 0.12);
+var limiteMedio = Math.round (rows * 0.5);
+var limiteAbajo = rows - limiteArriba;
+var lados = limiteArriba;
+
+var extrema = 1;
+
+//.......................... 
+var headerFooter         = Centro(columnas, c1) + lineFeed;
+
+for (let i = 0; i < rows; i++) {
+  switch (true) {
+    case (i < limiteArriba ):
+      Shape+= headerFooter
+      break;
+    case (i < limiteArriba + 1 ):
+      //..|+\+++++++++++++++++++..
+      var aperturaCierre       = Izquierda(lados, c1) + "|" + Centro (i-1, c2) + "\\" + Centro(tamanoDelCuerpo - (i+1) - 1, c2) + Centro(extrema, c2) + Derecha(lados, c1) + lineFeed;
+      Shape+= aperturaCierre
+      break; 
+    case (i > limiteArriba && i < limiteMedio):
+      //..|++\OOOOOOOOOOOOOOOOO+..
+      var cuerpo               = Izquierda(lados, c1) + "|" + Centro (i-1, c2) + "\\" + Centro(tamanoDelCuerpo - (i+1) - 1, c3) + Centro(extrema, c2) + Derecha(lados, c1) + lineFeed;
+      Shape+= cuerpo
+      break;     
+  
+    default:
+      Shape += "Somos estrellas" + lineFeed;
+      break;
+  }
+  
+}
+
+  return Shape;
 }
 function GetLineFeed(outputType){
   if (outputType != "web")
@@ -614,20 +689,3 @@ function Derecha(Tamano, CaracterDeseado){
 //    return PonerLetras(Tamano, CaracterDeseado);
 // }
 export { ShapeController};
-/*
-   columnas[24] 
-|.\..................... [1|] [1.] [1\] [21.]; miCentro = 1  para saber el centro es el valor del centro anterior mas miCentro(1)
-|..\.................... "|" + centro[miCentro] + "|" + derecha[rows-i]
-|...\...................
-|....\..................
-|.....\.................
-|......\................
-|....../................
-|...../.................
-|..../..................
-|.../...................
-|../....................
-|./.....................
-
-rows = 12
-*/
