@@ -11,8 +11,8 @@
                         "lado": ".",
                         "centro": "+",
                         "cantidad": 1,
-                        "ratio": 2,
-                        "shape": "square"
+                        "ratio": 1,
+                        "shape": "rhombus"
 
                     },
                     {

@@ -11,15 +11,79 @@ function ShapeController(c1, c2, outputType, shapeType, ratio){
       break;
     case "rhombus":
       return MakeRhombus(c1, c2, outputType, ratio);
+    case "cross":
+        return MakeCross(c1, c2, outputType, ratio);
+        break;  
     default:
-      return "shape not implemented"
+      return "Shape not implemented"
       break;
   }
 }
-
 function MakeDiamond(c1, c2, outputType, ratio) {
-
-   // console.log("Output Type Requested: " + outputType);
+/*
+...............................^............................... <- 31 + 1 + 31  i = 0
+............................./+++\............................. <- 29 + 3 + 29  i = 1 -Izquierda(rows-i+1, c1) ; -Centro = i +2  ; -Derecha(rows-i+1, c1)
+............................/+++++\............................ <- 28 + 5 + 28  i = 2
+.........................../+++++++\........................... <- 27 + 7 + 27  i = 3
+........................../+++++++++\..........................
+........................./+++++++++++\.........................
+......................../+++++++++++++\........................
+......................./+++++++++++++++\.......................
+....................../+++++++++++++++++\......................
+...................../+++++++++++++++++++\.....................
+..................../+++++++++++++++++++++\....................
+.................../+++++++++++++++++++++++\...................
+................../+++++++++++++++++++++++++\..................
+................./+++++++++++++++++++++++++++\.................
+................/+++++++++++++++++++++++++++++\................
+.............../+++++++++++++++++++++++++++++++\...............
+............../+++++++++++++++++++++++++++++++++\..............
+............./+++++++++++++++++++++++++++++++++++\.............
+............/+++++++++++++++++++++++++++++++++++++\............
+.........../+++++++++++++++++++++++++++++++++++++++\...........
+........../+++++++++++++++++++++++++++++++++++++++++\..........
+........./+++++++++++++++++++++++++++++++++++++++++++\.........
+......../+++++++++++++++++++++++++++++++++++++++++++++\........
+......./+++++++++++++++++++++++++++++++++++++++++++++++\.......
+....../+++++++++++++++++++++++++++++++++++++++++++++++++\......
+...../+++++++++++++++++++++++++++++++++++++++++++++++++++\.....
+..../+++++++++++++++++++++++++++++++++++++++++++++++++++++\....
+.../+++++++++++++++++++++++++++++++++++++++++++++++++++++++\...
+../+++++++++++++++++++++++++++++++++++++++++++++++++++++++++\..
+./+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\.
+/+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\
+\+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++/
+.\+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++/.
+..\+++++++++++++++++++++++++++++++++++++++++++++++++++++++++/..
+...\+++++++++++++++++++++++++++++++++++++++++++++++++++++++/...
+....\+++++++++++++++++++++++++++++++++++++++++++++++++++++/....
+.....\+++++++++++++++++++++++++++++++++++++++++++++++++++/.....
+......\+++++++++++++++++++++++++++++++++++++++++++++++++/......
+.......\+++++++++++++++++++++++++++++++++++++++++++++++/.......
+........\+++++++++++++++++++++++++++++++++++++++++++++/........
+.........\+++++++++++++++++++++++++++++++++++++++++++/.........
+..........\+++++++++++++++++++++++++++++++++++++++++/..........
+...........\+++++++++++++++++++++++++++++++++++++++/...........
+............\+++++++++++++++++++++++++++++++++++++/............
+.............\+++++++++++++++++++++++++++++++++++/.............
+..............\+++++++++++++++++++++++++++++++++/..............
+...............\+++++++++++++++++++++++++++++++/...............
+................\+++++++++++++++++++++++++++++/................
+.................\+++++++++++++++++++++++++++/.................
+..................\+++++++++++++++++++++++++/..................
+...................\+++++++++++++++++++++++/...................
+....................\+++++++++++++++++++++/....................
+.....................\+++++++++++++++++++/.....................
+......................\+++++++++++++++++/......................
+.......................\+++++++++++++++/.......................
+........................\+++++++++++++/........................
+.........................\+++++++++++/.........................
+..........................\+++++++++/..........................
+...........................\+++++++/...........................
+............................\+++++/............................
+.............................\+++/.............................
+...............................v...............................
+*/
 
    var rows = 30 * ratio;
    var Shape = "";
@@ -32,6 +96,7 @@ function MakeDiamond(c1, c2, outputType, ratio) {
      lineFeed = "\n";
    }
 
+   // TODO: hablar con luiz
    //  var headerDiamond = Izquierda(rows-i+1, c1) + "^" + Derecha(rows-i+1, c1) + lineFeed; (for the refactory)
    var tamanoDelCentro = 1;
    
@@ -58,7 +123,8 @@ function MakeDiamond(c1, c2, outputType, ratio) {
 
    
 };
-
+function MakeSquare(c1, c2, outputType, ratio) {
+  
 /*
 
 ........................ (24) columnas
@@ -78,8 +144,6 @@ function MakeDiamond(c1, c2, outputType, ratio) {
 [12] rows = columnas / 2
 
 */
-
-function MakeSquare(c1, c2, outputType, ratio) {
 
   var columnas =Math.round (24 * ratio) ;                   // # de columnas del area del trabajo
   var rows = Math.round(columnas * 0.25);       // # de vueltas de una mitad  
@@ -169,7 +233,9 @@ function MakeSquare(c1, c2, outputType, ratio) {
     // }
    return Shape;
 }
-/*
+function MakeRhombus (c1, c2, outputType, ratio){
+
+  /*
 ........................ (24 columnas)
 ........................ <-header
 ........................
@@ -186,23 +252,7 @@ limiteAbajo = row- limiteArriba
 ........................
 (12 rows) 
 
-
-
-
-
-
-........................ (24 columnas)
-.........+---------------+
-......../++++++++++++/..
-......./++++++++++++/.
-.........+---------------+
-........................
-........................
-
-
 */
-
-function MakeRhombus (c1, c2, outputType, ratio){
 
   var columnas =Math.round (24 * ratio) ;                         // # de columnas del area del trabajo
   var rows = Math.round(columnas * 0.25);                // # de vueltas de una mitad  
@@ -328,22 +378,218 @@ function MakeRhombusV1 (c1, c2, outputType){
   return Shape;
 
 };
+function MakeCross (c1, c2, outputType, ratio){
+/*
+                          columnas
+......................... [25.] 
+......................... limiteHeader = [rows * 0.2];                                   [20 % rows] -> 2/14
+..........+++++.......... [10.] [5+] [10.] limiteAperturaCierre = limiteHeader + 1
+..........+...+.......... [10.] [1+] [3.] [1+] [10.] 
+..........+...+.......... 
+....+++++++...+++++++.... [4.] [7+] [3.] [7+] [4.] limiteAlaArriba = [rows * 0.42];      [42 % rows] -> 6/14
+....+...............+.... [4.] [1+] [15.] [1+] [4.]
+....+...............+....
+....+++++++...+++++++.... limiteAlaAbajo = rows - limiteAlaArriba
+..........+...+.......... 
+..........+...+.......... 
+..........+++++.......... limiteAperturaCierre = limiteFooter - 1
+......................... limiteFooter = rows - limiteHeader
+.........................
+[14] rows = columnas / 2
 
+*/
 
+  var columnas =Math.round (25 * ratio) ;                  
+  var rows = Math.round (columnas * 0.56);  
+
+  var limiteHeader = Math.round (rows * 0.20);
+  var limiteAlaArriba = Math.round (rows * 0.42);
+  var limiteAlaAbajo = rows - limiteAlaArriba;
+  var limiteFooter = rows - limiteHeader;
+
+  var vExtremos = Math.round (columnas * 0.2);    
+  var lado1 = Math.round (columnas * 0.4);
+  var lado2 = Math.round (columnas * 0.16);
+  var border =  Math.round (columnas * 0.28);
+  var centro1 = Math.round (columnas * 0.12);
+  var centro2 = Math.round (columnas * 0.6);
+
+  var Shape = "";         // contenido del shape
+  var lineFeed = "\n";
+
+  var headerFooter         = Centro(columnas, c2) + lineFeed;
+  var aperturaCierre       = Izquierda(lado1, c2) + Centro(vExtremos, "-" ) + Derecha(lado1, c2)  + lineFeed;
+  var cuerpoVertical       = Izquierda(lado1, c2) + "|" + Centro(centro1, c2) + "|" + Derecha(lado1, c2) + lineFeed;
+  var ala                  = Izquierda(lado2, c2) +  Centro(border, "-") + Centro(centro1, c2) + Centro(border, "-") + Derecha(lado2, c2) + lineFeed;
+  var cuerpoHorizontal     = Izquierda(lado2, c2) + "|" + Centro(centro2, c2) + "|" + Derecha(lado2, c2) + lineFeed;
+
+  for (let i = 0; i < rows; i++) {
+    switch (true) {
+      case (i < limiteHeader):
+        Shape +=  i + headerFooter
+        break;
+      case (i == limiteHeader):
+        Shape += i + aperturaCierre
+      break;
+      case (i > limiteHeader && i < limiteAlaArriba):
+        Shape += i + cuerpoVertical
+      break; 
+      case (i == limiteAlaArriba):
+        Shape += i + ala
+      break;
+      case (i > limiteAlaArriba && i <= limiteAlaAbajo):
+        Shape += i + cuerpoHorizontal
+      break;
+      case (i < limiteFooter - 1):
+        Shape += i + ala
+        break;
+      case (i > limiteAlaAbajo && i <= limiteFooter):
+        Shape += i + cuerpoVertical
+        break; 
+      case (i == limiteFooter + 1):
+        Shape += i + aperturaCierre  
+        break;
+      case (i > limiteFooter ):
+        Shape += i + headerFooter   
+        break; 
+      default:
+        Shape += i + "Yo soy una estrella" + lineFeed;
+        break;
+    }
+  }
+ return Shape;
+ 
+}
+function MakeCrossV1 (c1, c2, outputType, ratio){
+  /*
+
+......................... [25] columnas
+......................... [2] limiteArriba = columnas * 0.08
+..........+++++.......... Izquierda [10-> lado1 = columnas * 0.40]; Border [5-> top = columnas * 0,20]; Derecha [lado1]   apertura = limiteArriba + 1
+..........+...+.......... Izquierda [10]; Border[1->sides = columnas * 0.04]; Centro1 [3->columnas * 0.12]; Border[1 sides]; Derecha [10] -> Cuerpo1
+..........+...+..........  
+....+++++++...+++++++.... Izquierda [4-> lado2 = columnas *0.16]; Border[7-> middle = columnas * 0.28]; Centro1 [3]; Border[7 middle]; Derecha [lado2] -> Cuerpo2
+....+...............+.... Izquierda [lado2]; Border[sides]; Centro2 [15-> columnas * 0.6]; Border[sides]; Derecha [lado2] -> Cuerpo3
+....+...............+....
+....+++++++...+++++++.... 
+..........+...+.......... 
+..........+...+.......... 
+..........+++++..........
+.........................
+.........................
+[14] rows = columnas / 2
+
+*/
+  
+  
+  var columnas =Math.round (25 * ratio) ;                 
+  var rows = Math.round (columnas * 0.28); 
+  var lado1 = Math.round (columnas * 0.40); 
+  var lado2 = Math.round (columnas * 0.16); 
+  var borderTop = Math.round (columnas * 0.20);
+  var borderMiddle = Math.round (columnas * 0.28);
+  var borderSides = Math.round (columnas * 0.04);    
+  var tamanoDelCentro1 = Math.round (columnas * 0.12);  
+  var tamanoDelCentro2 = Math.round (columnas * 0.6);  
+  
+    
+
+  var Shape = "";                                        // contenido del shape
+  var lineFeed = "\n";
+
+  // const cuerpoFinal =  (lateral * 2 + tamanoDelCentro);
+
+  // if (columnas < cuerpoFinal) {
+  //   columnas = cuerpoFinal;
+  // } else if (columnas > cuerpoFinal){
+  //   tamanoDelCentro += (columnas - cuerpoFinal) 
+  // }
+
+  var headerFooter = Centro(columnas, c1 ) +  lineFeed ;
+  var aperturaCierre = Izquierda(lado1, c1)  + Border((borderTop), c2) +  Derecha(lado1, c1) + lineFeed;
+  var cuerpo1 = Izquierda(lado1, c1) + Border(borderSides, c2) + Centro(tamanoDelCentro1, c1) + Border(borderSides, c2) + Derecha(lado1, c1) + lineFeed; //tal vez crear un otro border
+  var cuerpo2 = Izquierda(lado2, c1) + Border(borderMiddle, c2) + Centro(tamanoDelCentro1, c1) + Border(borderMiddle, c2) + Derecha(lado2, c1) + lineFeed;
+  var cuerpo3 = Izquierda(lado2, c1) + Border(borderSides, c2) + Centro(tamanoDelCentro2, c1) +  Border(borderSides, c2) + Derecha(lado2, c1) + lineFeed;
+
+  if (outputType == "web") {
+    lineFeed = "<br>";
+  } else {
+    lineFeed = "\n";
+  }
+
+   var limite = Math.round ((rows*2) * 0.2);
+   var limiteDeAbajo = rows*2 - limite;
+
+  // Shape = "ratio: " + ratio  +  ", columnas: " + columnas  + ", rows: " + (rows * 2)  + ", lateral: " +  lateral  + ", tamanoDelCentro: "  +  tamanoDelCentro +  ", limite: " + limite  + lineFeed;
+
+  // First Half
+  for (var i=0; i<rows*2; i++) {
+    
+    switch (true){
+     
+      // Header de arriba
+      case ( i < limite - 1):
+        Shape += headerFooter;
+        break;
+
+      // limite de arriba
+      // Apertura del Cuadrado
+      case (i == limite -1):
+        Shape += aperturaCierre;
+        break;
+
+      // limite de arriba2
+      case ( i > limite - 2):  //ask how we calculate limitey
+        Shape += cuerpo1;
+        break;    
+        
+      // Cierre del Cuadrado
+      case (i == limiteDeAbajo):
+        // Shape += aperturaCierre;
+        break;
+
+      // limite de abajo
+      case ( i > limiteDeAbajo):
+        // Shape += headerFooter;
+        break;
+
+      // Cuerpo del Cuadrado 
+      default:
+        // Shape += cuerpo;
+    }
+     GetLineFeed(outputType);
+   }
+
+    //  Second Half
+    //  for (var i=0; i<=rows; i++) {
+
+    //   switch (true) {
+
+    //     // Apertura del Cuadrado
+    //     case (i == (limite + 1)):
+    //       Shape += aperturaCierre;
+    //       break;
+
+    //      // Header
+    //     case ( i >= limite + 1 ):
+    //       Shape += headerFooter;
+    //      break;
+        
+    //     // Cuerpo del Cuadrado 
+    //     default:
+    //       Shape += cuerpo;
+    //    }
+    //    GetLineFeed(outputType);
+    // }
+   return Shape;
+ 
+}
 function GetLineFeed(outputType){
   if (outputType != "web")
   return process.stdout.write("\n"); 
 }
-
-// function PonerLetras(Tamano, LetraDeseada) {
-//     var MiFila = "";
-//     for (var i = 0; i < Tamano; i++) {
-//       MiFila += LetraDeseada;
-//     }
-//     return MiFila;
-// }
 function Izquierda(Tamano, CaracterDeseado){
-  return PonerLetras(Tamano, CaracterDeseado);
+   return PonerLetras(Tamano, CaracterDeseado);
 }
 function Centro(Tamano, CaracterDeseado){
     return PonerLetras(Tamano, CaracterDeseado);
@@ -351,72 +597,24 @@ function Centro(Tamano, CaracterDeseado){
 function Derecha(Tamano, CaracterDeseado){
     return PonerLetras(Tamano, CaracterDeseado);
 }
-
+function Border(Tamano, CaracterDeseado){
+   return PonerLetras(Tamano, CaracterDeseado);
+}
 export { ShapeController};
-
 /*
+   columnas[24] 
+|.\..................... [1|] [1.] [1\] [21.]; | + Centro[1-> rows+i]
+|..\....................
+|...\...................
+|....\..................
+|.....\.................
+|......\................
+|....../................
+|...../.................
+|..../..................
+|.../...................
+|../....................
+|./.....................
 
-...............................^............................... <- 31 + 1 + 31  i = 0
-............................./+++\............................. <- 29 + 3 + 29  i = 1 -Izquierda(rows-i+1, c1) ; -Centro = i +2  ; -Derecha(rows-i+1, c1)
-............................/+++++\............................ <- 28 + 5 + 28  i = 2
-.........................../+++++++\........................... <- 27 + 7 + 27  i = 3
-........................../+++++++++\..........................
-........................./+++++++++++\.........................
-......................../+++++++++++++\........................
-......................./+++++++++++++++\.......................
-....................../+++++++++++++++++\......................
-...................../+++++++++++++++++++\.....................
-..................../+++++++++++++++++++++\....................
-.................../+++++++++++++++++++++++\...................
-................../+++++++++++++++++++++++++\..................
-................./+++++++++++++++++++++++++++\.................
-................/+++++++++++++++++++++++++++++\................
-.............../+++++++++++++++++++++++++++++++\...............
-............../+++++++++++++++++++++++++++++++++\..............
-............./+++++++++++++++++++++++++++++++++++\.............
-............/+++++++++++++++++++++++++++++++++++++\............
-.........../+++++++++++++++++++++++++++++++++++++++\...........
-........../+++++++++++++++++++++++++++++++++++++++++\..........
-........./+++++++++++++++++++++++++++++++++++++++++++\.........
-......../+++++++++++++++++++++++++++++++++++++++++++++\........
-......./+++++++++++++++++++++++++++++++++++++++++++++++\.......
-....../+++++++++++++++++++++++++++++++++++++++++++++++++\......
-...../+++++++++++++++++++++++++++++++++++++++++++++++++++\.....
-..../+++++++++++++++++++++++++++++++++++++++++++++++++++++\....
-.../+++++++++++++++++++++++++++++++++++++++++++++++++++++++\...
-../+++++++++++++++++++++++++++++++++++++++++++++++++++++++++\..
-./+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\.
-/+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\
-\+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++/
-.\+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++/.
-..\+++++++++++++++++++++++++++++++++++++++++++++++++++++++++/..
-...\+++++++++++++++++++++++++++++++++++++++++++++++++++++++/...
-....\+++++++++++++++++++++++++++++++++++++++++++++++++++++/....
-.....\+++++++++++++++++++++++++++++++++++++++++++++++++++/.....
-......\+++++++++++++++++++++++++++++++++++++++++++++++++/......
-.......\+++++++++++++++++++++++++++++++++++++++++++++++/.......
-........\+++++++++++++++++++++++++++++++++++++++++++++/........
-.........\+++++++++++++++++++++++++++++++++++++++++++/.........
-..........\+++++++++++++++++++++++++++++++++++++++++/..........
-...........\+++++++++++++++++++++++++++++++++++++++/...........
-............\+++++++++++++++++++++++++++++++++++++/............
-.............\+++++++++++++++++++++++++++++++++++/.............
-..............\+++++++++++++++++++++++++++++++++/..............
-...............\+++++++++++++++++++++++++++++++/...............
-................\+++++++++++++++++++++++++++++/................
-.................\+++++++++++++++++++++++++++/.................
-..................\+++++++++++++++++++++++++/..................
-...................\+++++++++++++++++++++++/...................
-....................\+++++++++++++++++++++/....................
-.....................\+++++++++++++++++++/.....................
-......................\+++++++++++++++++/......................
-.......................\+++++++++++++++/.......................
-........................\+++++++++++++/........................
-.........................\+++++++++++/.........................
-..........................\+++++++++/..........................
-...........................\+++++++/...........................
-............................\+++++/............................
-.............................\+++/.............................
-...............................v...............................
-
+rows = 12
 */
