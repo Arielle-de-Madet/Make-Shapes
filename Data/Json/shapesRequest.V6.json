@@ -12,7 +12,7 @@
                     "centro": "*",
                     "cantidad": 1,
                     "ratio": 1,
-                    "shape": "cross"
+                    "shape": "envelope"
                 }
             ]
         } 

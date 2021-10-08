@@ -11,9 +11,13 @@ function ShapeController(c1, c2, outputType, shapeType, ratio){
       break;
     case "rhombus":
       return MakeRhombus(c1, c2, outputType, ratio);
+      break;
     case "cross":
         return MakeCross(c1, c2, outputType, ratio);
         break;  
+    case "envelope":
+      return MakeEnvelope(c1, c2, outputType, ratio);
+      break;      
     default:
       return "Shape not implemented"
       break;
@@ -417,6 +421,12 @@ function MakeCross (c1, c2, outputType, ratio){
   var Shape = "";         // contenido del shape
   var lineFeed = "\n";
 
+  if (outputType == "web") {
+    lineFeed = "<br>";
+  } else {
+    lineFeed = "\n";
+  }
+
   var headerFooter         = Centro(columnas, c2) + lineFeed;
   var aperturaCierre       = Izquierda(lado1, c2) + Centro(vExtremos, "-" ) + Derecha(lado1, c2)  + lineFeed;
   var cuerpoVertical       = Izquierda(lado1, c2) + "|" + Centro(centro1, c2) + "|" + Derecha(lado1, c2) + lineFeed;
@@ -584,6 +594,9 @@ function MakeCrossV1 (c1, c2, outputType, ratio){
    return Shape;
  
 }
+function MakeEnvelope (c1, c2, outputType, ratio){
+  return "Este es mi envelope"
+}
 function GetLineFeed(outputType){
   if (outputType != "web")
   return process.stdout.write("\n"); 
@@ -615,7 +628,6 @@ export { ShapeController};
 |.../...................
 |../....................
 |./.....................
-
 
 rows = 12
 */

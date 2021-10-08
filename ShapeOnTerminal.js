@@ -34,7 +34,7 @@ for (let j = 0; j < process.argv.length; j++) {
     }
 }
 
-
+// como llamar el programa "+" "*" "terminal" "./data/Json/shapesRequest.V5.json"
 
 // Now Let's Process all json requests from the file
  processJsonRequests(filePath);
