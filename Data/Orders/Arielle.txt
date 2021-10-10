@@ -1,16 +1,16 @@
-**************************
-**************************
-**|+\+++++++++++++++++++**
-**|++\OOOOOOOOOOOOOOOOO+**
-**|+++\OOOOOOOOOOOOOOOO+**
-**|++++\OOOOOOOOOOOOOOO+**
-**|+++++\OOOOOOOOOOOOOO+**
-**|++++++\OOOOOOOOOOOOO+**
-Somos estrellas
-Somos estrellas
-Somos estrellas
-Somos estrellas
-Somos estrellas
-Somos estrellas
-Somos estrellas
-Somos estrellas
+##########################
+##########################
+##|*\*******************##
+##|**\OOOOOOOOOOOOOOOOO*##
+##|***\OOOOOOOOOOOOOOOO*##
+##|****\OOOOOOOOOOOOOOO*##
+##|*****\OOOOOOOOOOOOOO*##
+##|******\OOOOOOOOOOOOO*##
+##|******/OOOOOOOOOOOOO*##
+##|*****/OOOOOOOOOOOOOO*##
+##|****/OOOOOOOOOOOOOOO*##
+##|***/OOOOOOOOOOOOOOOO*##
+##|**/OOOOOOOOOOOOOOOOO*##
+##|*/*******************##
+##########################
+##########################

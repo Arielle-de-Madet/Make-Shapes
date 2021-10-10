@@ -8,8 +8,9 @@
             "orders" : 
             [
                 {
-                    "lado": "*",
-                    "centro": "+",
+                    "lado": "#",
+                    "centro": "*",
+                    "columnas": "O",
                     "cantidad": 1,
                     "ratio": 1,
                     "shape": "envelope"

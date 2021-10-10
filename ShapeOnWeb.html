@@ -51,8 +51,8 @@
         <input type="text" id="c1" name="c1" size="2"><br><br>
         <label for="c2">Caracter del centro:</label>
         <input type="text" id="c2" name="c2" size="2"><br><br>
-        <!-- <label for="c3">Caracter de los borders:</label>
-        <input type="text" id="c3" name="c3" size="2"><br><br> -->
+        <label for="c3">Caracter de columnas:</label>
+        <input type="text" id="c3" name="c3" size="2"><br><br>
 
         <button onclick="CallShapeController()">Draw Shape</button>
 
@@ -87,11 +87,11 @@
 
               var c1 = document.getElementById("c1").value;
               var c2 = document.getElementById("c2").value;
-              
+              var c3 = document.getElementById("c3").value;
               var contenido = "";
               import("./DrawShape.js").then(shapeMaker => {
 
-                contenido = shapeMaker.ShapeController(c1, c2, "web");
+                contenido = shapeMaker.ShapeController(c1, c2, c3, "web");
                 document.getElementById("Shape").innerHTML = contenido
                 console.log("value: " + contenido);
                 callHello();

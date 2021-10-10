@@ -1,6 +1,6 @@
 import { PonerLetras } from "../utils/utils.js";
 
-function ShapeController(c1, c2, outputType, shapeType, ratio){
+function ShapeController(c1, c2, c3, outputType, shapeType, ratio){
 
   switch (shapeType) {
     case "diamond":
@@ -16,7 +16,7 @@ function ShapeController(c1, c2, outputType, shapeType, ratio){
         return MakeCross(c1, c2, outputType, ratio);
         break;  
     case "envelope":
-      return MakeEnvelope(c1, c2, "O", outputType, ratio);
+      return MakeEnvelope(c1, c2, c3, outputType, ratio);
       break;      
     default:
       return "Shape not implemented"
@@ -624,7 +624,7 @@ cuerpo = "..|" + Izquierda (i-1, c2) + "\\" + Derecha(tamanoDelCuerpo - (i+1), c
 rows = 16
 */
 
-var columnas =Math.round (26 * ratio) ;                   // # de columnas del area del trabajo
+var columnas = Math.round (26 * ratio) ;                   // # de columnas del area del trabajo
 var rows = Math.round(columnas * 0.61);                   // # de vueltas de una mitad  
 var tamanoDelCuerpo = Math.round(columnas * 0.84);        // # de columnas dentro del shap
 
@@ -644,32 +644,36 @@ var lados = limiteArriba;
 
 var extrema = 1;
 
-//.......................... 
-var headerFooter         = Centro(columnas, c1) + lineFeed;
+var headerFooter = "";
+var headerFooterDown = "";
+var aperturaCierre = "";
+var aperturaCierreDown = "";  //Izquierda(lados, c1) + "|" + Centro (i-1, c2) + "\\" + Centro(tamanoDelCuerpo - (i+1) - 1, c2) + Centro(extrema, c2) + Derecha(lados, c1) + lineFeed;
+var cuerpo = "";
+var cuerpoDown = "";
 
 for (let i = 0; i < rows; i++) {
   switch (true) {
     case (i < limiteArriba ):
-      Shape+= headerFooter
+      //.......................... 
+      headerFooter     += Centro(columnas, c1) + lineFeed;
+      headerFooterDown += Centro(columnas, c1) + lineFeed;
       break;
-    case (i < limiteArriba + 1 ):
+    case (i == limiteArriba ):
       //..|+\+++++++++++++++++++..
-      var aperturaCierre       = Izquierda(lados, c1) + "|" + Centro (i-1, c2) + "\\" + Centro(tamanoDelCuerpo - (i+1) - 1, c2) + Centro(extrema, c2) + Derecha(lados, c1) + lineFeed;
-      Shape+= aperturaCierre
+      //..|+/+++++++++++++++++++..
+      aperturaCierre       = Izquierda(lados, c1) + "|" + Centro (i-1, c2) + "\\" + Centro(tamanoDelCuerpo - (i+1) - 1, c2) + Centro(extrema, c2) + Derecha(lados, c1) + lineFeed;
+      aperturaCierreDown   = Izquierda(lados, c1) + "|" + Centro (i-1, c2) + "/" + Centro(tamanoDelCuerpo - (i+1) - 1, c2) + Centro(extrema, c2) + Derecha(lados, c1) + lineFeed;
       break; 
     case (i > limiteArriba && i < limiteMedio):
       //..|++\OOOOOOOOOOOOOOOOO+..
-      var cuerpo               = Izquierda(lados, c1) + "|" + Centro (i-1, c2) + "\\" + Centro(tamanoDelCuerpo - (i+1) - 1, c3) + Centro(extrema, c2) + Derecha(lados, c1) + lineFeed;
-      Shape+= cuerpo
-      break;     
-  
-    default:
-      Shape += "Somos estrellas" + lineFeed;
-      break;
+      //..|++/OOOOOOOOOOOOOOOOO+..
+      cuerpo               += Izquierda(lados, c1) + "|" + Centro (i-1, c2) + "\\" + Centro(tamanoDelCuerpo - (i+1) - 1, c3) + Centro(extrema, c2) + Derecha(lados, c1) + lineFeed;
+      cuerpoDown            = Izquierda(lados, c1) + "|" + Centro (i-1, c2) + "/" + Centro(tamanoDelCuerpo - (i+1) - 1, c3) + Centro(extrema, c2) + Derecha(lados, c1) + lineFeed + cuerpoDown;
+      break;    
   }
-  
+  GetLineFeed(outputType); 
 }
-
+  Shape = headerFooter + aperturaCierre + cuerpo + cuerpoDown + aperturaCierreDown + headerFooterDown;
   return Shape;
 }
 function GetLineFeed(outputType){
