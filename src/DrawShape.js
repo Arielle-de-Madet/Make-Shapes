@@ -693,3 +693,26 @@ function Derecha(Tamano, CaracterDeseado){
 //    return PonerLetras(Tamano, CaracterDeseado);
 // }
 export { ShapeController};
+/*
+[24]
+
+........................ 
+........................ limiteArriba = rows * 0.16
+.......----------....... [7.lado] [10-centro] [7.lado]
+....../..........\...... [6.lado] [1/] [10-centro] [1\] [6.lado]
+...../............\..... [5.lado] [1/] [12-centro] [1\] [5.lado] limiteMedioUp = rows * 0.41
+....|..............|.... [4.lado] [1|] [10-centro] [1|] [4.lado] limiteMedio = rows * 0.5
+....|..............|....   
+.....\............/.....                                         limiteMedioDown = rows * 0.66
+......\........../......  
+.......----------.......  
+........................ limiteAbajo = rows - limiteArriba 
+........................ 
+rows = 12
+lado = 7
+tamanoDelCuerpo = columnas * 0.33
+headerFooter = Centro(columnas, c1) 
+aperturaCierra = Izquierda(lado, c1) + Centro(tamanoDelCuerpo, "-") + Derecha(lado, c1)
+cuerpo1 =  Izquierda(lado -i+2, c1) + "/" + Centro(tamanoDelCuerpo, "-") + "\" + Derecha(lado -i+2, c1)
+
+*/
