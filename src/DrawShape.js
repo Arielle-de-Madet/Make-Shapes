@@ -17,7 +17,10 @@ function ShapeController(c1, c2, c3, outputType, shapeType, ratio){
         break;  
     case "envelope":
       return MakeEnvelope(c1, c2, c3, outputType, ratio);
-      break;      
+      break;
+    case "polygon":
+      return MakePolygon(c1, c2, c3, outputType, ratio);
+      break;            
     default:
       return "Shape not implemented"
       break;
@@ -642,7 +645,7 @@ var limiteMedio = Math.round (rows * 0.5);
 var limiteAbajo = rows - limiteArriba;
 var lados = limiteArriba;
 
-var extrema = 1;
+var extrema = 1;  //el border derecha del envelope
 
 var headerFooter = "";
 var headerFooterDown = "";
@@ -668,12 +671,99 @@ for (let i = 0; i < rows; i++) {
       //..|++\OOOOOOOOOOOOOOOOO+..
       //..|++/OOOOOOOOOOOOOOOOO+..
       cuerpo               += Izquierda(lados, c1) + "|" + Centro (i-1, c2) + "\\" + Centro(tamanoDelCuerpo - (i+1) - 1, c3) + Centro(extrema, c2) + Derecha(lados, c1) + lineFeed;
-      cuerpoDown            = Izquierda(lados, c1) + "|" + Centro (i-1, c2) + "/" + Centro(tamanoDelCuerpo - (i+1) - 1, c3) + Centro(extrema, c2) + Derecha(lados, c1) + lineFeed + cuerpoDown;
+      cuerpoDown           = Izquierda(lados, c1) + "|" + Centro (i-1, c2) + "/" + Centro(tamanoDelCuerpo - (i+1) - 1, c3) + Centro(extrema, c2) + Derecha(lados, c1) + lineFeed + cuerpoDown;
       break;    
   }
   GetLineFeed(outputType); 
 }
   Shape = headerFooter + aperturaCierre + cuerpo + cuerpoDown + aperturaCierreDown + headerFooterDown;
+  return Shape;
+}
+function MakePolygon (c1, c2, c3, outputType, ratio){
+
+  /*
+[24]
+
+........................ 
+........................ limiteArriba = rows * 0.16
+.......----------....... [7.lado] [10-centro] [7.lado]
+....../..........\...... [6.lado] [1/] [10-centro] [1\] [6.lado]
+...../............\..... [5.lado] [1/] [12-centro] [1\] [5.lado] limiteMedioUp = rows * 0.41
+....|..............|.... [4.lado] [1|] [14-centro] [1|] [4.lado] limiteMedio = rows * 0.5
+....|..............|....   
+.....\............/.....                                         limiteMedioDown = rows - limiteMedioUp
+......\........../......  
+.......----------.......  
+........................ limiteAbajo = rows - limiteArriba 
+........................ 
+rows = 12
+lado = 7
+tamanoDelCuerpo = columnas * 0.33
+headerFooter = Centro(columnas, c1) 
+aperturaCierra = Izquierda(lado, c1) + Centro(tamanoDelCuerpo, "-") + Derecha(lado, c1)
+cuerpo1 =  Izquierda(lado -i+2, c1) + "/" + Centro(tamanoDelCuerpo, "-") + "\" + Derecha(lado -i+2, c1)
+
+*/
+
+var columnas = Math.round (24 * ratio);                   // # de columnas del area del trabajo
+var rows = Math.round(columnas * 0.5);                     // # de vueltas de una mitad  
+var tamanoDelCuerpo = Math.round(columnas * 0.41);         // # de columnas dentro del shap
+var lado =  Math.round(columnas * 0.29);
+
+var Shape = "";                                            // contenido del shape
+var lineFeed = "\n";
+
+if (outputType == "web") {
+  lineFeed = "<br>";
+} else {
+  lineFeed = "\n";
+}
+
+var limiteArriba = Math.round (rows * 0.16);
+var limiteMedioUp = Math.round (rows * 0.41);
+var limiteMedio = Math.round (rows * 0.5);
+var limiteMedioDown = rows - limiteMedioUp;
+var limiteAbajo = rows - limiteArriba;
+
+
+var offSet = 1;
+
+var headerFooter = "";
+var headerFooterDown = "";
+var aperturaCierre = "";
+var aperturaCierreDown = "";
+var cuerpoUp = Izquierda((lado - offSet), c1) + "/" + Centro((tamanoDelCuerpo), c2) + "\\" + Derecha((lado - offSet), c1) + lineFeed;
+var cuerpoMedio = "";
+var cuerpoDown = "";
+
+for (let i = 0; i<rows; i++){
+  switch (true) {
+    case (i < limiteArriba ):
+      //.......................... 
+      headerFooter      += Centro(columnas, c1) + lineFeed;
+      headerFooterDown  += Centro(columnas, c1) + lineFeed;
+      break;
+    case (i == limiteArriba ):
+      //.......----------.......
+      aperturaCierre    = Izquierda(lado, c1) + Centro(tamanoDelCuerpo, "-") + Derecha(lado, c1) + lineFeed;
+      aperturaCierreDown = Izquierda(lado, c1) + Centro(tamanoDelCuerpo, "-") + Derecha(lado, c1) + lineFeed;
+      break; 
+    case (i > limiteArriba && i < limiteMedioUp):
+      //....../..........\......
+      //......\........../......
+      cuerpoUp += Izquierda((lado - offSet), c1) + "/" + Centro((tamanoDelCuerpo + offSet) - 1, c2) + "\\" + Derecha((lado - offSet), c1) + lineFeed;
+      cuerpoDown += Izquierda((lado - offSet), c1) + "\\" + Centro((tamanoDelCuerpo + offSet) - 1, c2) + "/" + Derecha((lado - offSet), c1) + lineFeed;
+      offSet += 1;
+      break;
+     case (i > limiteMedioUp && i <= limiteMedio):
+      //....|..............|....
+      cuerpoMedio  += Izquierda(lado - offSet, c1) + "|" + Centro(tamanoDelCuerpo + offSet, c2) + "|" + Derecha(lado - offSet, c1) + lineFeed;
+        offSet += 1;
+       break;    
+    }
+  GetLineFeed(outputType); 
+}
+  Shape += headerFooter + aperturaCierre + cuerpoUp + cuerpoMedio + cuerpoDown + aperturaCierreDown + headerFooterDown;
   return Shape;
 }
 function GetLineFeed(outputType){
@@ -693,26 +783,3 @@ function Derecha(Tamano, CaracterDeseado){
 //    return PonerLetras(Tamano, CaracterDeseado);
 // }
 export { ShapeController};
-/*
-[24]
-
-........................ 
-........................ limiteArriba = rows * 0.16
-.......----------....... [7.lado] [10-centro] [7.lado]
-....../..........\...... [6.lado] [1/] [10-centro] [1\] [6.lado]
-...../............\..... [5.lado] [1/] [12-centro] [1\] [5.lado] limiteMedioUp = rows * 0.41
-....|..............|.... [4.lado] [1|] [10-centro] [1|] [4.lado] limiteMedio = rows * 0.5
-....|..............|....   
-.....\............/.....                                         limiteMedioDown = rows * 0.66
-......\........../......  
-.......----------.......  
-........................ limiteAbajo = rows - limiteArriba 
-........................ 
-rows = 12
-lado = 7
-tamanoDelCuerpo = columnas * 0.33
-headerFooter = Centro(columnas, c1) 
-aperturaCierra = Izquierda(lado, c1) + Centro(tamanoDelCuerpo, "-") + Derecha(lado, c1)
-cuerpo1 =  Izquierda(lado -i+2, c1) + "/" + Centro(tamanoDelCuerpo, "-") + "\" + Derecha(lado -i+2, c1)
-
-*/
