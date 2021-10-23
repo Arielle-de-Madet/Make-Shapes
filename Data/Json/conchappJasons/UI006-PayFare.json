@@ -1,0 +1,12 @@
+{
+    "fromUserID": "01",
+    "toUserID": "12",
+    "amount": "35.00",
+    "transactionDate": "20-08-2021",
+    "transactionType": "Payment",
+    "timeOfTransaction": "263895617289",
+    "latitude": "18,457830,",
+    "longitude": "-69,960545",
+    "locationName":"Sambil"
+
+}

@@ -1,0 +1,15 @@
+{
+    "fromUserID": "DE007-FromUser",
+    "toUserID": "DE015-toUser",
+    "amount": "DE017",
+    "transactionDate": "DE015",
+    "transactionType": "DE016-Value for this field must be payment",
+    "timeOfTransaction": "DE008",
+    "latitude": "DE011",
+    "longitude": "DE013",
+    "locationName":"DE012"
+
+}
+
+
+ 

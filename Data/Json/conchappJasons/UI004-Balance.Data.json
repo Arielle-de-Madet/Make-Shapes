@@ -1,42 +1,47 @@
 {
   "userID": "01",
   "ultimaRecarga": "25-07-2021",
-  "Amount": "1.234.00",
+  "balance": "205.00",
   "transactions": [
+    {
+      "transactionDate": "09-10-2021",
+      "details": "Ave Independencia",
+      "amount": "25.00"
+    },
     {
       "transactionDate": "20-08-2021",
       "details": "St Clarens Ave",
-      "Amount": "30.00"
+      "amount": "30.00"
     },
     {
       "transactionDate": "02-07-2021",
       "details": "Recarga",
-      "Amount": "250.10"
+      "amount": "250.10"
     },
     {
       "transactionDate": "01-05-2021",
       "details": "Ave Independencia ",
-      "Amount": "25.30"
+      "amount": "25.30"
     },
     {
       "transactionDate": "01-02-2021",
       "details": "Churchil",
-      "Amount": "25.00"
+      "amount": "25.00"
     },
     {
       "transactionDate": "24-07-2021",
       "details": "Ave JFK",
-      "Amount": "250.00"
+      "amount": "250.00"
     },
     {
       "transactionDate": "24-07-2021",
       "details": "Ave Independencia",
-      "Amount": "25.00"
+      "amount": "25.00"
     },
     {
       "transactionDate": "20-07-2021",
       "details": "Churchil",
-      "Amount": "150.00"
+      "amount": "150.00"
     }
   ] 
 }  

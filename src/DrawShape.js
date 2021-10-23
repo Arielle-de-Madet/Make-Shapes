@@ -748,18 +748,18 @@ for (let i = 0; i<rows; i++){
       aperturaCierre    = Izquierda(lado, c1) + Centro(tamanoDelCuerpo, "-") + Derecha(lado, c1) + lineFeed;
       aperturaCierreDown = Izquierda(lado, c1) + Centro(tamanoDelCuerpo, "-") + Derecha(lado, c1) + lineFeed;
       break; 
-    case (i > limiteArriba && i < limiteMedioUp):
+    case (i > limiteArriba && i < limiteMedioUp -1):
       //....../..........\......
       //......\........../......
-      cuerpoUp += Izquierda((lado - offSet), c1) + "/" + Centro((tamanoDelCuerpo + offSet) - 1, c2) + "\\" + Derecha((lado - offSet), c1) + lineFeed;
-      cuerpoDown += Izquierda((lado - offSet), c1) + "\\" + Centro((tamanoDelCuerpo + offSet) - 1, c2) + "/" + Derecha((lado - offSet), c1) + lineFeed;
-      offSet += 1;
+      cuerpoUp += Izquierda((lado - 2), c1) + "/" + Centro((tamanoDelCuerpo + 2) , c2) + "\\" + Derecha((lado - 2), c1) + lineFeed;
+    // cuerpoDown += Izquierda((lado - offSet), c1) + "\\" + Centro((tamanoDelCuerpo + offSet) - 1, c2) + "/" + Derecha((lado - offSet), c1) + lineFeed;
+      //offSet += 1;
       break;
-     case (i > limiteMedioUp && i <= limiteMedio):
-      //....|..............|....
-      cuerpoMedio  += Izquierda(lado - offSet, c1) + "|" + Centro(tamanoDelCuerpo + offSet, c2) + "|" + Derecha(lado - offSet, c1) + lineFeed;
-        offSet += 1;
-       break;    
+    //  case (i > limiteMedioUp && i <= limiteMedio):
+    //   //....|..............|....
+    //   cuerpoMedio  += Izquierda(lado - offSet, c1) + "|" + Centro(tamanoDelCuerpo + offSet, c2) + "|" + Derecha(lado - offSet, c1) + lineFeed;
+    //     offSet += 1;
+    //    break;    
     }
   GetLineFeed(outputType); 
 }
