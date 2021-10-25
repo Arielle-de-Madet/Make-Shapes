@@ -9,10 +9,10 @@
             [
                 {
                     "lado": ".",
-                    "centro": "+",
+                    "centro": "0",
                     "columnas": "O",
                     "cantidad": 1,
-                    "ratio": 1,
+                    "ratio": 5,
                     "shape": "polygon"
                 }
             ]

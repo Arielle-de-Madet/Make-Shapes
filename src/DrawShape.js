@@ -709,6 +709,7 @@ var columnas = Math.round (24 * ratio);                   // # de columnas del a
 var rows = Math.round(columnas * 0.5);                     // # de vueltas de una mitad  
 var tamanoDelCuerpo = Math.round(columnas * 0.41);         // # de columnas dentro del shap
 var lado =  Math.round(columnas * 0.29);
+var ladoMedio = 0;
 
 var Shape = "";                                            // contenido del shape
 var lineFeed = "\n";
@@ -721,49 +722,53 @@ if (outputType == "web") {
 
 var limiteArriba = Math.round (rows * 0.16);
 var limiteMedioUp = Math.round (rows * 0.41);
-var limiteMedio = Math.round (rows * 0.5);
+//var limiteMedio = Math.round (rows * 0.5);
 var limiteMedioDown = rows - limiteMedioUp;
-var limiteAbajo = rows - limiteArriba;
+//var limiteAbajo = rows - limiteArriba;
 
 
-var offSet = 1;
+var offSet = 1 ;
 
 var headerFooter = "";
 var headerFooterDown = "";
 var aperturaCierre = "";
 var aperturaCierreDown = "";
-var cuerpoUp = Izquierda((lado - offSet), c1) + "/" + Centro((tamanoDelCuerpo), c2) + "\\" + Derecha((lado - offSet), c1) + lineFeed;
+var cuerpoUp = ""; //Izquierda((lado - offSet), c1) + "/" + Centro((tamanoDelCuerpo), c2) + "\\" + Derecha((lado - offSet), c1) + lineFeed;
 var cuerpoMedio = "";
-var cuerpoDown = "";
+var cuerpoDown = ""; //Izquierda((lado - offSet)-1, c1) + "\\" + Centro((tamanoDelCuerpo + offSet)+1, c2) + "/" + Derecha((lado - offSet)-1, c1) + lineFeed;
 
 for (let i = 0; i<rows; i++){
+
+  //offSet += 1;
+
   switch (true) {
     case (i < limiteArriba ):
       //.......................... 
-      headerFooter      += Centro(columnas, c1) + lineFeed;
-      headerFooterDown  += Centro(columnas, c1) + lineFeed;
+      headerFooter      += Centro(columnas + offSet, c1) + lineFeed;
+    //  headerFooterDown  += Centro(columnas, c1) + lineFeed;
       break;
     case (i == limiteArriba ):
       //.......----------.......
-      aperturaCierre    = Izquierda(lado, c1) + Centro(tamanoDelCuerpo, "-") + Derecha(lado, c1) + lineFeed;
-      aperturaCierreDown = Izquierda(lado, c1) + Centro(tamanoDelCuerpo, "-") + Derecha(lado, c1) + lineFeed;
+      aperturaCierre    = Izquierda(lado, c1) + Centro(tamanoDelCuerpo + offSet, "=") + Derecha(lado, c1) + lineFeed;
+    // aperturaCierreDown = Izquierda(lado, c1) + Centro(tamanoDelCuerpo, "-") + Derecha(lado, c1) + lineFeed;
       break; 
-    case (i > limiteArriba && i < limiteMedioUp -1):
+    case (i > limiteArriba && i < limiteMedioUp):
       //....../..........\......
       //......\........../......
-      cuerpoUp += Izquierda((lado - 2), c1) + "/" + Centro((tamanoDelCuerpo + 2) , c2) + "\\" + Derecha((lado - 2), c1) + lineFeed;
-    // cuerpoDown += Izquierda((lado - offSet), c1) + "\\" + Centro((tamanoDelCuerpo + offSet) - 1, c2) + "/" + Derecha((lado - offSet), c1) + lineFeed;
-      //offSet += 1;
+
+     cuerpoUp += Izquierda((lado - offSet), c1) + "/"   + Centro((tamanoDelCuerpo + (offSet*2)), c2) + "\\" + Derecha((lado - offSet), c1) + lineFeed;
+     cuerpoDown = Izquierda((lado - offSet), c1) + "\\" + Centro((tamanoDelCuerpo + (offSet*2)), c2) + "/"  + Derecha((lado - offSet), c1) + lineFeed + cuerpoDown;
+     offSet += 1;
+     ladoMedio = lado - offSet;
       break;
-    //  case (i > limiteMedioUp && i <= limiteMedio):
-    //   //....|..............|....
-    //   cuerpoMedio  += Izquierda(lado - offSet, c1) + "|" + Centro(tamanoDelCuerpo + offSet, c2) + "|" + Derecha(lado - offSet, c1) + lineFeed;
-    //     offSet += 1;
-    //    break;    
+     case (i > limiteMedioUp && i <= limiteMedioDown):
+      //....|..............|....
+      cuerpoMedio  += Izquierda(ladoMedio, c1) + "|" + Centro(tamanoDelCuerpo + (offSet*2), c2) + "|" + Derecha(ladoMedio, c1) + lineFeed;
+       break;    
     }
   GetLineFeed(outputType); 
 }
-  Shape += headerFooter + aperturaCierre + cuerpoUp + cuerpoMedio + cuerpoDown + aperturaCierreDown + headerFooterDown;
+  Shape += headerFooter + aperturaCierre + cuerpoUp + cuerpoMedio + cuerpoDown + aperturaCierre + headerFooter;
   return Shape;
 }
 function GetLineFeed(outputType){
